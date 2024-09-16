@@ -1,0 +1,114 @@
+---
+title: "Statistical Inference"
+format: revealjs
+editor: visual
+---
+
+## Statistical Inference Recap
+
+Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+## Week 1
+
+-   Probability
+
+    -   Mass function
+
+    -   Density function
+
+-   Bayes' rule
+
+    -   Independence
+
+-   Expected values
+
+## Week 2
+
+-   Variance & Variability
+
+-   Distributions
+
+    -   Binomial Distribution
+
+    -   Normal Distribution
+
+    -   Poisson
+
+-   Asymptotics
+
+    -   Law of Large Number
+
+    -   Central Limit Theorem
+
+    -   Confidence Interval
+
+## \[Confidence Interval\]([07 03 Asymptotics and confidence intervals \| Coursera](https://www.coursera.org/learn/statistical-inference/lecture/RxU7M/07-03-asymptotics-and-confidence-intervals))
+
+For 95% confidence interval, this interval has 95% probability to contain $\mu$.
+
+The actual interpretation of this is that if we were to repeatedly get samples of size n from this population. Construct a confidence interval in each case. About 95% of the intervals we obtained would contain $\mu$ the parameter that we're trying to estimate.
+
+## Wald's Confidence Interval
+
+-   Assuming asymptotic with CTL
+
+```{r, echo = TRUE}
+library(UsingR)
+data(father.son)
+x <- father.son$height # height in inches
+n = length(x)
+# divide by 12 to get 95% CI of mean height in feet
+(mean(x) + c(-1,1) * qnorm(0.975) * sd(x)/sqrt(n))/12 
+```
+
+## Binomial CI
+
+```{r}
+# for p = 0.56, n = 100
+0.56 + qnorm(0.975) * c(-1,1) * sqrt(0.56*0.44/100)
+# [1] 0.4627099 0.6572901
+# or using binom.test using exact test
+binom.test(56, 100)$conf.int
+# [1] 0.4571875 0.6591640
+# attr(,"conf.level")
+# [1] 0.95
+```
+
+## 
+
+## Agresti/Coull Confidence Interval
+
+-   When n isn't large enough for CLT to be applicable of the p-value.
+
+## Week 3
+
+-   Confidence Interval
+
+    -   T confidence interval
+
+    -   Independent t-test vs paired t-test
+
+-   Hypothesis Testing
+
+-   P-value:
+
+## Week 4
+
+-   Power calculation
+
+    -   Power calculation example for T-test
+
+-   Multiple comparisons (testing)
+
+-   Resampling
+
+    -   Bootstraping
+
+    -   Permutation tests
+
+## Homework from Coursera
+- [Github](https://github.com/DataScienceSpecialization/courses)
+- [HW1](homework/hw1.html#1)
+- [HW2](homework/hw2.html#1)
+- [HW3](homework/hw3.html#1)
+- [HW4](homework/hw4.html#1)
