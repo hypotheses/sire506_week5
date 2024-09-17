@@ -66,11 +66,32 @@ myplot <- function(sigma, mua, n, alpha){
     g = g + geom_vline(xintercept=xitc, size = 3)
     g
 }
+myplot2 <- function(sigma, mua, n, alpha) {
+  mu0 <- 30  # Assuming a value for mu0 as it is not defined in the original function
+  x <- seq(27, 36, length.out = 100)
+  
+  # Calculate the density values
+  y1 <- dnorm(x, mean = mu0, sd = sigma / sqrt(n))
+  y2 <- dnorm(x, mean = mua, sd = sigma / sqrt(n))
+  
+  # Plot the first density function
+  plot(x, y1, type = "l", col = "red", lwd = 2, ylim = range(c(y1, y2)), 
+       xlab = "mu", ylab = "Density", main = "Density Functions")
+  
+  # Add the second density function
+  lines(x, y2, col = "blue", lwd = 2)
+  
+  # Calculate the vertical line position
+  xitc <- mu0 + qnorm(1 - alpha) * sigma / sqrt(n)
+  
+  # Add the vertical line
+  abline(v = xitc, col = "black", lwd = 3)
+}
 manipulate(
-    myplot(sigma, mua, n, alpha),
+    myplot2(sigma, mua, n, alpha),
     sigma = slider(1, 10, step = 1, initial = 4),
     mua = slider(30, 35, step = 1, initial = 32),
-    n = slider(1, 50, step = 1, initial = 16),
+    n = slider(1, 50, step = 1, initial = 50),
     alpha = slider(0.01, 0.1, step = 0.01, initial = 0.05)
     )
 ```
